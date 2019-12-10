@@ -257,6 +257,30 @@ function View() {
     return result;
   }
 
+  function trackSpecialChars(e) {
+    // handle special char events
+    if ([8, 9, 13, 27, 32].includes(e.which)) {
+      e.preventDefault();
+      sendKey(e.which);
+    }
+  }
+
+  function trackKeyChars(e) {
+    e.preventDefault();
+    sendKey(e.which);
+  }
+
+  function toggleKeyboard(switchOn) {
+    // to control when we want to switch user input on/off
+    if (switchOn) {
+      document.addEventListener('keypress', trackKeyChars);
+      document.addEventListener('keydown', trackSpecialChars);
+    } else {
+      document.removeEventListener('keypress', trackKeyChars);
+      document.removeEventListener('keydown', trackSpecialChars);
+    }
+  }
+
   async function initializeDevice() {
     let result = await devicefarm.createProject({name: getRandomString()}).promise();
     console.log(result);
@@ -299,11 +323,13 @@ function View() {
         createElements(settings.elementId, dimensions);
         initVideoSocket(endpoint, settings.logCallback);
         initControlSocket(endpoint, settings.logCallback, 5000);
+        toggleKeyboard(true);
         addListeners();
       });
     },
     sendText(inputText) { // called by beak with all text
       text = inputText.split('');
+      toggleKeyboard(false);
       sendSingleChar();
     }
   };
