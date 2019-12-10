@@ -1,0 +1,20 @@
+{
+  "name": "devicefarm_iframe",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "aws-sdk": "^2.586.0",
+    "websocket": "^1.0.30"
+  },
+  "devDependencies": {
+    "webpack": "^4.20.2",
+    "webpack-cli": "^3.1.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack ./index.js -o dist/index.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
