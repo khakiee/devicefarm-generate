@@ -186,10 +186,13 @@ fabric.properties
 # End of https://www.gitignore.io/api/node,webstorm
 
 # aws configuration
-./config.json
+config.json
 
 # node_modules
 ./node_modules
 
 # dist
-./dist
+dist
+
+# Mac .DS_Store
+.DS_Store
